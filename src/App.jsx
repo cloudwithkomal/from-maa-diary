@@ -1,7 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"; // Import Link
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"; 
 import HomePage from "./pages/HomePage/HomePage";
 import RecipePage from "./pages/RecipePage/RecipePage";
+import Logo from "./assets/logo.jpg";
 import "./app.scss";
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
       <div className="app">
         <header className="header">
           <Link to="/"> 
-            <img src="./assets/logo.jpg" alt="Logo" />
+            <img src={Logo} alt="Logo" className="logo" />
           </Link>
           <h1>From Maa's Diary</h1>
         </header>

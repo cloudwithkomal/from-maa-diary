@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./HomePage.scss";
+import AlooParathaImage from "../../assets/aloo-paratha.jpg";
+
 
 const recipes = [
-  { id: 1, title: "Aloo Paratha", image: "..\src\assets\aloo-paratha.jpg" },
+  { id: 1, title: "Aloo Paratha", image: AlooParathaImage },
 ];
 
 function HomePage() {

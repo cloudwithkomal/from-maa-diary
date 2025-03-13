@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import "./RecipePage.scss";
+import AlooParathaImage from "../../assets/aloo-paratha.jpg";
 
 const recipes = {
     1: {
@@ -24,7 +25,7 @@ const recipes = {
         "Roll out again gently and cook on a hot tawa with ghee until golden brown.",
         "Serve hot with butter, curd, or pickle."
       ],
-      image: "../../assets/aloo-paratha.jpg"
+      image: AlooParathaImage
     },
   };  
 
