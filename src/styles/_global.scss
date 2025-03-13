@@ -1,6 +1,7 @@
 @use "./partials/fonts" as *;
 @use "./partials/mixin" as *;
 @use "./partials/color-var" as *;
+@use "sass:color"; // Import the color module
 
 body {
   background-color: $background-color;
@@ -36,5 +37,5 @@ button {
 }
 
 button:hover {
-  background: darken($accent-color, 10%);
+  background: color.adjust($accent-color, $lightness: -10%);
 }
