@@ -1,0 +1,30 @@
+.home-page {
+    text-align: center;
+  }
+  
+  .recipe-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .recipe-card {
+    text-decoration: none;
+    color: black;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    transition: 0.3s;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+  }
+  
