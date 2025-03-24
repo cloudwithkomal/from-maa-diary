@@ -1,56 +1,86 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { getRecipeById, getCommentsByRecipeId, addComment } from "../../api"; 
 import "./RecipePage.scss";
-import AlooParathaImage from "../../assets/aloo-paratha.jpg";
-
-const recipes = {
-    1: {
-      title: "Aloo Paratha",
-      ingredients: [
-        "Whole wheat flour",
-        "Potatoes",
-        "Salt",
-        "Red chili powder",
-        "Turmeric powder",
-        "Garam masala",
-        "Coriander",
-        "Ginger",
-        "Ghee or butter"
-      ],
-      steps: [
-        "Knead a soft dough with whole wheat flour and water. Let it rest for 15 minutes.",
-        "Mix mashed potatoes with salt, chili powder, turmeric, garam masala, coriander, and ginger.",
-        "Divide dough into small balls and roll them out.",
-        "Place a spoonful of the potato mixture in the center and fold the dough around it.",
-        "Roll out again gently and cook on a hot tawa with ghee until golden brown.",
-        "Serve hot with butter, curd, or pickle."
-      ],
-      image: AlooParathaImage
-    },
-  };  
 
 function RecipePage() {
   const { id } = useParams();
-  const recipe = recipes[id];
+  const [recipe, setRecipe] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
 
-  if (!recipe) return <p>Recipe not found!</p>;
+  useEffect(() => {
+    const fetchRecipeData = async () => {
+      const recipeData = await getRecipeById(id);
+      setRecipe(recipeData);
+
+      const commentData = await getCommentsByRecipeId(id);
+      setComments(commentData);
+    };
+
+    fetchRecipeData();
+  }, [id]);
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (!newComment.trim()) return;
+
+    const addedComment = await addComment(id, newComment);
+    if (addedComment) {
+      setComments([...comments, addedComment]); 
+      setNewComment(""); 
+    }
+  };
+
+  if (!recipe) return <p>Loading...</p>;
 
   return (
-    <div className="recipe-page">
-      <h2>{recipe.title}</h2>
-      <img src={recipe.image} alt={recipe.title} />
-      <h3>Ingredients</h3>
-      <ul>
-        {recipe.ingredients.map((item, index) => (
-            <li key={index}>{item}</li>
-        ))}
-    </ul>
+    <div className="recipe-page-container">
+      <div className="recipe-page">
+        <h2>{recipe.title}</h2>
+        <img src={recipe.image_url} alt={recipe.title} />
+
+        <h3>Ingredients</h3>
+        <ul>
+          {recipe.ingredients.map((ingredient, index) => (
+            <li key={index}>{ingredient.quantity} {ingredient.name}</li>
+          ))}
+        </ul>
+
         <h3>Steps</h3>
-<ul>
-  {recipe.steps.map((step, index) => (
-    <li key={index}>{step}</li>
-  ))}
-</ul>
+        <ul>
+          {recipe.instructions.split("\n").map((step, index) => (
+            <li key={index}>{step}</li>
+          ))}
+        </ul>
+
+        {/* Comments Section */}
+        <div className="comments-section">
+          <h3>Comments</h3>
+          {comments.length > 0 ? (
+            <ul>
+              {comments.map((comment) => (
+                <li key={comment.id}>
+                   {comment.comment}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No comments yet. Be the first to comment!</p>
+          )}
+
+          {/* Comment Form */}
+          <form className="comment-form" onSubmit={handleCommentSubmit}>
+            <textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Write your comment..."
+              required
+            />
+            <button type="submit" >Add Comment</button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

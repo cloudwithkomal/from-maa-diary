@@ -134,7 +134,7 @@ Mockups will be designed using Figma to outline the user interface and experienc
 
 ## Future Implementations
 
-- **User Authentication**: Allow users to create accounts and save favorite recipes.
+- **User Authentication**: Allow users to create accounts and save favorite recipes and have a personal receipe idea.
 - **Recipe Submission**: Let users contribute their own family recipes.
 - **Photo Uploads**: Add images to each recipe for a more visual experience.
 - **Search & Filters**: Improve navigation with filtering options by ingredients, cuisine, etc.

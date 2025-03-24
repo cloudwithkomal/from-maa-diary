@@ -4,7 +4,6 @@ import HomePage from "./pages/HomePage/HomePage";
 import RecipePage from "./pages/RecipePage/RecipePage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Story from "./components/Story/Story";
 import "./app.scss";
 
 function App() {
@@ -13,7 +12,6 @@ function App() {
       <div className="app">
         <Header />
         <main className="content">
-          <Story /> 
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/recipe/:id" element={<RecipePage />} />

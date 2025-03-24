@@ -4,6 +4,7 @@ import "./Story.scss";
 function Story() {
   return (
     <section className="story">
+      <h2 className="story-heading">A Daughter's Tribute</h2>
       <blockquote className="quote">
         "A mother’s recipe isn’t just about ingredients—it’s a memory, a lesson, and a love letter written in flavors." 
       </blockquote>
